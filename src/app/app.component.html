@@ -1,20 +1,68 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="wrapper">
+  <!-- Sidebar Holder -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <button type="button" id="sidebarCollapse" class="btn btn-link">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+    </div>
+    <div class="menuItems">
+      <ul class="list-unstyled">
+        <li>
+          <a href="#dartaSubmenu" data-toggle="collapse">
+            <i class="fas fa-sign-in-alt"></i>
+             दर्ता
+          </a>
+          <ul class="collapse list-unstyled text-left" id="dartaSubmenu">
+            <li>
+              <a routerLink="/add-darta" routerLinkActive="active">नयाँ</a>
+            </li>
+            <li>
+              <a routerLink="/darta" routerLinkActive="active">दर्ताको सूची</a>
+            </li>
+            <li>
+              <a routerLink="/search-darta" routerLinkActive="active">खोज</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#chalaniSubmenu" data-toggle="collapse">
+            <i class="fas fa-sign-out-alt"></i>
+            चलानी
+          </a>
+          <ul class="collapse list-unstyled" id="chalaniSubmenu">
+            <li>
+              <a routerLink="/add-chalani" routerLinkActive="active">नयाँ</a>
+            </li>
+            <li>
+              <a routerLink="/chalani" routerLinkActive="active">चलानिको सूची</a>
+            </li>
+            <li>
+              <a routerLink="/search-chalani" routerLinkActive="active">खोज</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    
+    
+  </nav>
 
+  <!-- Page Content Holder -->
+  <div id="content" >
+      <nav class="navbar justify-content-end navbar-dark bg-dark">
+          <a routerLink="/" routerLinkActive="active" class="nav-link">ड्यासबोर्ड</a>
+          <a routerLink="/settings" routerLinkActive="active" class="nav-link">सेटिग्स</a>
+          <a routerLink="/profile" routerLinkActive="active" class="nav-link">प्रोफाइल</a>        
+      </nav>
+    <div id="routerContent">
+      <router-outlet></router-outlet>
+    </div>
+    <div style="position: inline-block">
+        <img src="assets/Emblem_of_Nepal.svg" style="position: absolute;bottom: 40px;right: 30px; height: 60px;width:63px;">
+    </div>
+  </div>
+</div>
+<footer class="fixed-bottom">
+Well, Hello there matey! I am footer.
+</footer>

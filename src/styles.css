@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  background: #eee;
+}
+
+/* Main Container */
+#main{
+  clear: both;
+  margin: auto;
+  margin-top: 55px;
+  margin-left: 200px;
+  background: skyblue;
+  color: #000000;
+  padding: 20px;
+}
