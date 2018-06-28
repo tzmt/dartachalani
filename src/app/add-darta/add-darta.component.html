@@ -1,51 +1,62 @@
-<div>
-  <form>
-      <div class="form-row">
-        <div class="form-group col-md-3">
-          <label>दर्ता नं.</label>
-          <input type="number" class="form-control" id="dartaNo" placeholder="">
-        </div>
-        <div class="form-group col-md-3">
-          <label>दर्ता मिति</label>
-          <input type="date" class="form-control" id="dartaDate" placeholder="">
-        </div>
-        <div class="form-group col-md-3">
-          <label>प्राप्त भएको पत्र संख्या</label>
-          <input type="number" class="form-control" id="dartaPages" placeholder="">
-        </div>
-        <div class="form-group col-md-3">
-          <label>प्राप्त भएको पत्रको मिति</label>
-          <input type="date" class="form-control" id="dartaPagesDate" placeholder="">
-        </div>
+<form [formGroup]="dartaForm" (ngSubmit)="addDarta(dartaForm.value)">
+  <div class="form-row">
+      <!-- <div class="form-group col-md-3">
+        <label>दर्ता नं.</label>
+        <input type="number" class="form-control" formControlName="dartaNo" placeholder="">
+      </div> -->
+      <div class="form-group col-md-3">
+        <label>दर्ता मिति</label>
+        <input type="text" id="dartaDate" class="form-control nepaliDate" formControlName="dartaDate" placeholder="" required>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label>पठाउने अफिसको नाम</label>
-          <input type="text" class="form-control" id="dartaAddress" placeholder="">
-        </div>
+      <div class="form-group col-md-3">
+        <label>प्राप्त भएको पत्र संख्या</label>
+        <span *ngIf="dartaForm.controls.dartaPages.invalid && dartaForm.controls.dartaPages.touched" style="color: red">&nbsp; &nbsp;*</span>
+        <input type="number" class="form-control" formControlName="dartaPages" placeholder="" required>
       </div>
-      <div class="form-row">
-        <div class="form-group col-6">
-          <label>विषय</label>
-          <textarea type="text" class="form-control" rows="3" id="dartaSubject" placeholder=""></textarea>
-        </div>
+      <div class="form-group col-md-3">
+        <label>प्राप्त भएको पत्रको मिति</label>
+        <input type="text" id="dartaPagesDate" class="form-control" formControlName="dartaPagesDate" placeholder="" required>
       </div>
-      <div class="form-row">
-        <div class="form-group col-3"> 
-          <label>बुझिलिने फाटवालाको नाम</label>
-          <input type="text" class="form-control" id="dartaDeptName" placeholder="">
-        </div>
-        <div class="form-group col-3">
-          <label>मिति</label>
-          <input type="date" class="form-control" id="dartaDeptDate" placeholder="">
-        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>पठाउने अफिसको नाम</label>
+        <span *ngIf="dartaForm.controls.dartaAddress.invalid && dartaForm.controls.dartaAddress.touched" style="color: red">&nbsp; &nbsp;*</span>
+        <input type="text" class="form-control" formControlName="dartaAddress" placeholder="" required>
       </div>
-      <div class="form-row">
-        <div class="form-group col-4">
-          <label>कैफियत</label>
-          <textarea type="text" class="form-control" rows="3" id="dartaRemarks" placeholder=""></textarea>
-        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label>विषय</label>
+        <span *ngIf="dartaForm.controls.dartaSubject.invalid && dartaForm.controls.dartaSubject.touched" style="color: red">&nbsp; &nbsp;*</span>
+        <textarea type="text" class="form-control" rows="3" formControlName="dartaSubject" placeholder="" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-3"> 
+        <label>बुझिलिने फाटवालाको नाम</label>
+        <span *ngIf="dartaForm.controls.dartaDeptName.invalid && dartaForm.controls.dartaDeptName.touched" style="color: red">&nbsp; &nbsp;*</span>
+        <input type="text" class="form-control" formControlName="dartaDeptName" placeholder="" required>
+      </div>
+      <div class="form-group col-3">
+        <label>मिति</label>
+        <input type="text" id="dartaDeptDate" class="form-control" formControlName="dartaDeptDate" placeholder="" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label>कैफियत</label>
+        <textarea type="text" class="form-control" rows="3" formControlName="dartaRemarks" placeholder=""></textarea>
+      </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit" [disabled]="dartaForm.controls.dartaAddress.invalid == true || dartaForm.controls.dartaDeptName.invalid == true || dartaForm.controls.dartaSubject.invalid == true || dartaForm.controls.dartaPages.invalid == true">
+    <div id="errAlert" style="color: red"
+      *ngIf="dartaForm.invalid
+            && dartaForm.controls.dartaPages.touched 
+            &&  dartaForm.controls.dartaAddress.touched 
+            && dartaForm.controls.dartaDeptName.touched
+            && dartaForm.controls.dartaSubject.touched 
+            && dartaForm.controls.dartaRemarks.touched">
+      {{errAlert}}
+    </div>
+</form>

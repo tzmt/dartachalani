@@ -1,7 +1,9 @@
+html{
+  font-size: 12px;
+}
 body{
   background: #eee;
 }
-
 /* Main Container */
 #main{
   clear: both;

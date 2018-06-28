@@ -1,26 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <meta charset="utf-8">
   <title>Dartachalani</title>
   <base href="./">
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/nepali.datepicker.v2.2.min.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
+  
   <script defer src="./assets/js/fa.js"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
+
+
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-  <app-root></app-root>
-  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-  <script src="./assets/js/jquery-3.3.1.min.js"></script>
+  
+  <app-root>
+
+  </app-root>
+  
+  <script src="./assets/js/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
   <script src="./assets/js/popper.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>
   <script src="./assets/js/coreui.min.js"></script>
-  <script src="./assets/js/index.js"></script>
-  <script>if (window.module) module = window.module;</script>
+  <script type="text/javascript" src="./assets/nepali.datepicker.v2.2.min.js"></script>
 
+  <script src="./assets/js/index.js"></script>
+  
+  <!-- <script>if (window.module) module = window.module;</script> -->
+  
   <script type="text/javascript">
     $(document).ready(function () {
       $('#sidebarCollapse').on('click', function () {
@@ -28,5 +42,6 @@
       });
     });
   </script>
+
 </body>
 </html>
