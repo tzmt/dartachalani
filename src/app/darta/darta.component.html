@@ -103,12 +103,13 @@
                             <textarea type="text" class="form-control" rows="3" formControlName="dartaRemarks" placeholder=""></textarea>
                         </div>
                     </div>
-                    <div id="errAlert" style="color: red" *ngIf="dartaForm.invalid
-                                                                                && dartaForm.controls.dartaPages.touched 
-                                                                                &&  dartaForm.controls.dartaAddress.touched 
-                                                                                && dartaForm.controls.dartaDeptName.touched
-                                                                                && dartaForm.controls.dartaSubject.touched 
-                                                                                && dartaForm.controls.dartaRemarks.touched">
+                    <div id="errAlert" style="color: red" 
+                        *ngIf="dartaForm.invalid
+                                && dartaForm.controls.dartaPages.touched 
+                                &&  dartaForm.controls.dartaAddress.touched 
+                                && chalaniForm.controls.dartaDeptName.touched
+                                && dartaForm.controls.dartaSubject.touched 
+                                && dartaForm.controls.dartaRemarks.touched">
                         {{errAlert}}
                     </div>
                     <div class="modal-footer">

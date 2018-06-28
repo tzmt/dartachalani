@@ -61,13 +61,11 @@ app.on('activate', () => {
 })
 
 ipcMain.on('newDarta', (event, arg) => {
-    var db = new sqlite3.Database(dbFile);
     db.serialize(function () {
         db.run("CREATE TABLE IF NOT EXISTS darta(dartaNo INTEGER PRIMARY KEY AUTOINCREMENT, dartaDate BLOB, dartaPages INTEGER, dartaPagesDate BLOB, dartaAddress TEXT, dartaSubject TEXT, dartaDeptName TEXT, dartaDeptDate BLOB, dartaRemarks TEXT);");
         db.run(`INSERT INTO darta(dartaDate, dartaPages, dartaPagesDate, dartaAddress, dartaSubject, dartaDeptName, dartaDeptDate, dartaRemarks) VALUES ("${arg.dartaDate}", ${arg.dartaListSchema.dartaPages}, "${arg.dartaPagesDate}", "${arg.dartaListSchema.dartaAddress}", "${arg.dartaListSchema.dartaSubject}", "${arg.dartaListSchema.dartaDeptName}", "${arg.dartaDeptDate}", "${arg.dartaListSchema.dartaRemarks}" )`);
         }
     )
-db.close();
     console.log("Darta done");
 });
 
@@ -94,4 +92,38 @@ ipcMain.on('editDarta', (event, arg) => {
         db.run(`UPDATE darta SET dartaNo=${arg.dartaListSchema.dartaNo}, dartaDate="${arg.dartaDate}",  dartaPages=${arg.dartaListSchema.dartaPages}, dartaPagesDate="${arg.dartaPagesDate}", dartaAddress="${arg.dartaListSchema.dartaAddress}", dartaSubject="${arg.dartaListSchema.dartaSubject}", dartaDeptName="${arg.dartaListSchema.dartaDeptName}", dartaDeptDate="${arg.dartaDeptDate}", dartaRemarks="${arg.dartaListSchema.dartaRemarks}" WHERE dartaNo=${arg.dartaListSchema.dartaNo} AND dartaDate="${arg.dartaDate}";`);
     });
     event.sender.send('dartaEdited', arg);
+})
+
+ipcMain.on('newChalani', (event, arg) => {
+    db.serialize(function () {
+        db.run("CREATE TABLE IF NOT EXISTS chalani(chalaniNo INTEGER PRIMARY KEY AUTOINCREMENT, chalaniDate BLOB, chalaniPages INTEGER, chalaniPagesDate BLOB, chalaniDestName TEXT, chalaniDestAddress TEXT, chalaniSubject TEXT, chalaniHulakNo TEXT, chalaniRemarks TEXT);");
+        db.run(`INSERT INTO chalani(chalaniDate, chalaniPages, chalaniPagesDate, chalaniDestName, chalaniDestAddress, chalaniSubject, chalaniHulakNo, chalaniRemarks) VALUES ("${arg.chalaniDate}", ${arg.chalaniListSchema.chalaniPages}, "${arg.chalaniPagesDate}", "${arg.chalaniListSchema.chalaniDestName}","${arg.chalaniListSchema.chalaniDestAddress}", "${arg.chalaniListSchema.chalaniSubject}", "${arg.chalaniListSchema.chalaniHulakNo}", "${arg.chalaniListSchema.chalaniRemarks}" )`);
+    }
+    )
+    console.log("Chalani done");
+});
+
+ipcMain.on('listChalani', (event, arg) => {
+    db.all("SELECT * from chalani;", function (err, row) {
+        console.log("List all chalani");
+        console.log("*****");
+        event.sender.send('chalaniListReceived', row);
+    });
+})
+
+ipcMain.on('deleteChalani', (event, arg) => {
+    console.log(JSON.stringify(arg));
+    db.serialize(function () {
+        db.run(`DELETE FROM chalani WHERE chalaniNo=${arg.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
+    });
+    event.sender.send('chalaniDeleted', arg);
+})
+
+ipcMain.on('editChalani', (event, arg) => {
+    console.log(arg);
+    db.serialize(function () {
+        // db.run(`UPDATE chalani SET chalaniDate = "${arg.chalaniDate}",  chalaniPages=${arg.chalaniPages}, chalaniPagesDate="${arg.chalaniPagesDate}", chalaniAddress="${arg.chalaniAddress}", chalaniSubject="${arg.chalaniSubject}", chalaniDeptName="${arg.chalaniDeptName}", chalaniDeptDate="${arg.chalaniDeptDate}", chalaniRemarks="${arg.chalaniRemarks}" WHERE chalaniNo=${arg.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
+        db.run(`UPDATE chalani SET chalaniNo=${arg.chalaniListSchema.chalaniNo}, chalaniDate="${arg.chalaniDate}",  chalaniPages=${arg.chalaniListSchema.chalaniPages}, chalaniPagesDate="${arg.chalaniPagesDate}", chalaniDestName="${arg.chalaniListSchema.chalaniDestName}", chalaniDestAddress="${arg.chalaniListSchema.chalaniDestAddress}", chalaniSubject="${arg.chalaniListSchema.chalaniSubject}", chalaniHulakNo="${arg.chalaniListSchema.chalaniHulakNo}", chalaniRemarks="${arg.chalaniListSchema.chalaniRemarks}" WHERE chalaniNo=${arg.chalaniListSchema.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
+    });
+    event.sender.send('chalaniEdited', arg);
 })

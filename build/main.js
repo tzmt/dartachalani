@@ -41,7 +41,7 @@ module.exports = "::-webkit-input-placeholder{\r\n    color: blue;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <form>\n    <div class=\"form-row\">\n      <div class=\"form-group col-md-3\">\n        <label>चलानी नं.</label>\n        <input type=\"number\" class=\"form-control\" id=\"chalaniNo\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-md-3\">\n        <label>चलानी मिति</label>\n        <input type=\"date\" class=\"form-control\" id=\"chalaniDate\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-md-3\">\n        <label>चलानी पत्र संख्या</label>\n        <input type=\"number\" class=\"form-control\" id=\"chalaniPages\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-md-3\">\n        <label>चलानी पत्र मिति</label>\n        <input type=\"date\" class=\"form-control\" id=\"chalaniPagesDate\" placeholder=\"\">\n      </div>\n    </div>\n    <div class=\"form-row\">\n      <div class=\"form-group col-3\">\n        <label>पाउनेको नाम</label>\n        <input type=\"text\" class=\"form-control\" id=\"chalaniAddress\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-3\"></div>\n      <div class=\"form-group col-3\">\n        <label>पाउनेको ठेगाना</label>\n        <input type=\"text\" class=\"form-control\" id=\"chalaniAddress\" placeholder=\"\">\n      </div>\n    </div>\n    <div class=\"form-row\">\n        <div class=\"form-group col-md-3\">\n          <label>हुलाक/र.नं.</label>\n          <input type=\"number\" class=\"form-control\" id=\"chalaniHulakNo\" placeholder=\"\">\n        </div>\n    </div>\n    <div class=\"form-row\">\n      <div class=\"form-group col-6\">\n        <label>विषय</label>\n        <textarea type=\"text\" class=\"form-control\" rows=\"3\" id=\"chalaniSubject\" placeholder=\"\"></textarea>\n      </div>\n   </div>\n   <div class=\"form-row\">\n    <div class=\"form-group col-4\">\n      <label>कैफियत</label>\n      <textarea type=\"text\" class=\"form-control\" rows=\"3\" id=\"chalaniRemarks\" placeholder=\"\"></textarea>\n    </div>\n   </div>\n   <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </form>\n</div>"
+module.exports = "<!-- <div>\n  <form>\n    <div class=\"form-row\">\n      <div class=\"form-group col-md-3\">\n        <label>चलानी नं.</label>\n        <input type=\"number\" class=\"form-control\" id=\"chalaniNo\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-md-3\">\n        <label>चलानी मिति</label>\n        <input type=\"date\" class=\"form-control\" id=\"chalaniDate\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-md-3\">\n        <label>चलानी पत्र संख्या</label>\n        <input type=\"number\" class=\"form-control\" id=\"chalaniPages\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-md-3\">\n        <label>चलानी पत्र मिति</label>\n        <input type=\"date\" class=\"form-control\" id=\"chalaniPagesDate\" placeholder=\"\">\n      </div>\n    </div>\n    <div class=\"form-row\">\n      <div class=\"form-group col-3\">\n        <label>पाउनेको नाम</label>\n        <input type=\"text\" class=\"form-control\" id=\"chalaniAddress\" placeholder=\"\">\n      </div>\n      <div class=\"form-group col-3\"></div>\n      <div class=\"form-group col-3\">\n        <label>पाउनेको ठेगाना</label>\n        <input type=\"text\" class=\"form-control\" id=\"chalaniAddress\" placeholder=\"\">\n      </div>\n    </div>\n    <div class=\"form-row\">\n        <div class=\"form-group col-md-3\">\n          <label>हुलाक/र.नं.</label>\n          <input type=\"number\" class=\"form-control\" id=\"chalaniHulakNo\" placeholder=\"\">\n        </div>\n    </div>\n    <div class=\"form-row\">\n      <div class=\"form-group col-6\">\n        <label>विषय</label>\n        <textarea type=\"text\" class=\"form-control\" rows=\"3\" id=\"chalaniSubject\" placeholder=\"\"></textarea>\n      </div>\n   </div>\n   <div class=\"form-row\">\n    <div class=\"form-group col-4\">\n      <label>कैफियत</label>\n      <textarea type=\"text\" class=\"form-control\" rows=\"3\" id=\"chalaniRemarks\" placeholder=\"\"></textarea>\n    </div>\n   </div>\n   <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n  </form>\n</div> -->\n\n<form [formGroup]=\"chalaniForm\" (ngSubmit)=\"addChalani(chalaniForm.value)\">\n  <div class=\"form-row\">\n    <!-- <div class=\"form-group col-md-3\">\n        <label>दर्ता नं.</label>\n        <input type=\"number\" class=\"form-control\" formControlName=\"dartaNo\" placeholder=\"\">\n      </div> -->\n    <div class=\"form-group col-md-3\">\n      <label>चलानी मिति</label>\n      <input type=\"text\" id=\"chalaniDate\" class=\"form-control\" formControlName=\"chalaniDate\" placeholder=\"\" required>\n    </div>\n    <div class=\"form-group col-md-3\">\n      <label>चलानी पत्र संख्या</label>\n      <span *ngIf=\"chalaniForm.controls.chalaniPages.invalid && chalaniForm.controls.chalaniPages.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n      <input type=\"number\" class=\"form-control\" formControlName=\"chalaniPages\" placeholder=\"\" required>\n    </div>\n    <div class=\"form-group col-md-3\">\n      <label>चलानी पत्र मिति</label>\n      <input type=\"text\" id=\"chalaniPagesDate\" class=\"form-control\" formControlName=\"chalaniPagesDate\" placeholder=\"\" required>\n    </div>\n  </div>\n  <div class=\"form-row\">\n    <div class=\"form-group col-md-4\">\n      <label>पाउनेको नाम</label>\n      <span *ngIf=\"chalaniForm.controls.chalaniDestName.invalid && chalaniForm.controls.chalaniDestName.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n      <input type=\"text\" class=\"form-control\" formControlName=\"chalaniDestName\" placeholder=\"\" required>\n    </div>\n    <div class=\"form-group col-3\">\n      <label>पाउनेको ठेगाना</label>\n      <span *ngIf=\"chalaniForm.controls.chalaniDestAddress.invalid && chalaniForm.controls.chalaniDestAddress.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n      <input type=\"text\" class=\"form-control\"  formControlName=\"chalaniDestAddress\" id=\"chalaniDestAddress\" placeholder=\"\">\n    </div>\n  </div>\n  <div class=\"form-row\">\n    <div class=\"form-group col-md-3\">\n      <label>हुलाक/र.नं.</label>\n      <span *ngIf=\"chalaniForm.controls.chalaniHulakNo.invalid && chalaniForm.controls.chalaniHulakNo.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n      <input type=\"text\" class=\"form-control\" formControlName=\"chalaniHulakNo\" id=\"chalaniHulakNo\" placeholder=\"\">\n    </div>\n  </div>\n  <div class=\"form-row\">\n    <div class=\"form-group col-6\">\n      <label>विषय</label>\n      <span *ngIf=\"chalaniForm.controls.chalaniSubject.invalid && chalaniForm.controls.chalaniSubject.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n      <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"chalaniSubject\" placeholder=\"\" required></textarea>\n    </div>\n  </div>\n  <div class=\"form-row\">\n    <div class=\"form-group col-4\">\n      <label>कैफियत</label>\n      <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"chalaniRemarks\" placeholder=\"\"></textarea>\n    </div>\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\" [disabled]=\"chalaniForm.controls.chalaniDestAddress.invalid == true || chalaniForm.controls.chalaniDestName.invalid == true || chalaniForm.controls.chalaniHulakNo.invalid == true || chalaniForm.controls.chalaniSubject.invalid == true || chalaniForm.controls.chalaniPages.invalid == true\">\n  <div id=\"errAlert\" style=\"color: red\" *ngIf=\"chalaniForm.invalid\n            && chalaniForm.controls.chalaniPages.touched \n            && chalaniForm.controls.chalaniDestName.touched\n            && chalaniForm.controls.chalaniDestAddress.touched\n            && chalaniForm.controls.chalaniHulakNo.touched\n            && chalaniForm.controls.chalaniSubject.touched\">\n    {{errAlert}}\n  </div>\n</form>"
 
 /***/ }),
 
@@ -56,6 +56,11 @@ module.exports = "<div>\n  <form>\n    <div class=\"form-row\">\n      <div clas
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddChalaniComponent", function() { return AddChalaniComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var ngx_electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-electron */ "./node_modules/ngx-electron/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,10 +71,79 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
+var adbs = __webpack_require__(/*! ad-bs-converter */ "./node_modules/ad-bs-converter/src/converter.js");
+;
 var AddChalaniComponent = /** @class */ (function () {
-    function AddChalaniComponent() {
+    function AddChalaniComponent(fb, _electron, router) {
+        this.fb = fb;
+        this._electron = _electron;
+        this.router = router;
+        this.errAlert = "तपाइले दिएको विवरण मिलेन | कृपया ( * ) भएका ठाउँलाई सच्याउनुहोस् | ";
+        this.star = "*";
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var YY = d.getFullYear();
+        var MM = (month < 10 ? '0' : '') + month;
+        var DD = (day < 10 ? '0' : '') + day;
+        var date = adbs.ad2bs(YY + "/" + MM + "/" + DD);
+        var convertedDate = date.en.year + "-" + date.en.month + "-" + date.en.day;
+        this.chalaniForm = this.fb.group({
+            chalaniNo: 0,
+            chalaniDate: convertedDate,
+            chalaniPages: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].min(1), _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].max(999)])],
+            chalaniPagesDate: convertedDate,
+            chalaniDestName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniDestAddress: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniHulakNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniSubject: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniRemarks: ''
+        });
+        console.log(this.chalaniForm.controls);
+        this.chalaniForm.valueChanges.subscribe(console.log);
     }
+    AddChalaniComponent.prototype.addChalani = function (val) {
+        var _dd, _ddd, _dpd;
+        _dd = jQuery("#chalaniDate").val();
+        _ddd = jQuery("#chalaniDeptDate").val();
+        _dpd = jQuery("#chalaniPagesDate").val();
+        var _val = {
+            chalaniListSchema: {
+                chalaniNo: val.chalaniNo,
+                chalaniDate: val.chalaniDate,
+                chalaniPages: val.chalaniPages,
+                chalaniPagesDate: val.chalaniPagesDate,
+                chalaniDestName: val.chalaniDestName,
+                chalaniDestAddress: val.chalaniDestAddress,
+                chalaniSubject: val.chalaniSubject,
+                chalaniHulakNo: val.chalaniHulakNo,
+                chalaniRemarks: val.chalaniRemarks
+            },
+            chalaniDate: _dd,
+            chalaniPagesDate: _dpd,
+        };
+        console.log("Hello from addchalani");
+        console.log(_val);
+        this._electron.ipcRenderer.send('newChalani', _val);
+        this._electron.ipcRenderer.on('success', function (event, arg) {
+            console.log(arg);
+        });
+        this.chalaniForm.reset();
+        this.router.navigate(['chalani']);
+    };
     AddChalaniComponent.prototype.ngOnInit = function () {
+        jQuery('#chalaniDate').nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true
+        });
+        jQuery('#chalaniPagesDate').nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true
+        });
     };
     AddChalaniComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -77,7 +151,7 @@ var AddChalaniComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./add-chalani.component.html */ "./src/app/add-chalani/add-chalani.component.html"),
             styles: [__webpack_require__(/*! ./add-chalani.component.css */ "./src/app/add-chalani/add-chalani.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"], ngx_electron__WEBPACK_IMPORTED_MODULE_2__["ElectronService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], AddChalaniComponent);
     return AddChalaniComponent;
 }());
@@ -413,7 +487,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  chalani works!\n</p>\n"
+module.exports = "<div *ngIf=\"flag\">\n  <div class=\"table-responsive-sm\">\n    <table datatable [dtOptions]=\"dtOptions\" dtInstance=\"dtInstance\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" class=\"table table-sm\">\n      <thead class=\"thead-dark\">\n        <tr>\n          <th width=\"5%\">चलानी नं</th>\n          <th width=\"8%\">चलानी मिति</th>\n          <th width=\"7%\">पत्र संख्या</th>\n          <th width=\"9%\">चलानी पत्र मिति</th>\n          <th width=\"13%\">पाउने अफिसको नाम</th>\n          <th width=\"14%\">ठेगाना</th>\n          <th width=\"13%\">विषय</th>\n          <th width=\"5%\">हुलाक/र.नं.</th>\n          <th width=\"10%\">कैफियत</th>\n          <th width=\"3%\" class=\"no-arrow\"></th>\n          <th width=\"3%\" class=\"no-arrow\"></th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let items of chalaniList \" class=\"table-light\">\n          <td width=\"5%\" class=\"table-light \">{{items.chalaniNo}}</td>\n          <td width=\"8%\" class=\"table-light \">{{items.chalaniDate}}</td>\n          <td width=\"7%\" class=\"table-light \">{{items.chalaniPages}}</td>\n          <td width=\"9%\" class=\"table-light \">{{items.chalaniPagesDate}}</td>\n          <td width=\"13%\" class=\"table-light \">{{items.chalaniDestName}}</td>\n          <td width=\"13%\" class=\"table-light \">{{items.chalaniDestAddress}}</td>\n          <td width=\"14%\" class=\"table-light \">{{items.chalaniSubject}}</td>\n          <td width=\"5%\" class=\"table-light \">{{items.chalaniHulakNo}}</td>\n          <td width=\"10%\" class=\"table-light \">{{items.chalaniRemarks}}</td>\n          <th width=\"3%\">\n            <button (click)=\"dataParse(items)\" data-toggle=\"modal\" data-target=\"#editChalani\" class=\"btn btn-success btn-sm\">\n              <i class=\"fas fa-edit\"></i>\n            </button>\n          </th>\n          <th width=\"3%\">\n            <button (click)=\"deleteChalani(items)\" class=\"btn btn-danger btn-sm\">\n              <i class=\"fas fa-trash-alt\"></i>\n            </button>\n          </th>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n<div class=\"modal fade\" id=\"editChalani\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalTitle\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"modalTitle\">दर्ता सम्पादन</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\" id=\"modal\">\n        <form [formGroup]=\"chalaniForm\" (ngSubmit)=\"editChalani(chalaniForm.value)\">\n          <div class=\"form-row\">\n            <div class=\"form-group col-md-3\">\n                <label>चलानी नं.</label>\n                <input type=\"number\" class=\"form-control\" formControlName=\"chalaniNo\" disabled placeholder=\"\">\n              </div>\n            <div class=\"form-group col-md-3\">\n              <label>चलानी मिति</label>\n              <input type=\"text\" id=\"chalaniDate\" class=\"form-control\" formControlName=\"chalaniDate\" placeholder=\"\" required>\n            </div>\n            <div class=\"form-group col-md-3\">\n              <label>चलानी पत्र संख्या</label>\n              <span *ngIf=\"chalaniForm.controls.chalaniPages.invalid && chalaniForm.controls.chalaniPages.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n              <input type=\"number\" class=\"form-control\" formControlName=\"chalaniPages\" placeholder=\"\" required>\n            </div>\n            <div class=\"form-group col-md-3\">\n              <label>चलानी पत्र मिति</label>\n              <input type=\"text\" id=\"chalaniPagesDate\" class=\"form-control\" formControlName=\"chalaniPagesDate\" placeholder=\"\" required>\n            </div>\n          </div>\n          <div class=\"form-row\">\n            <div class=\"form-group col-md-4\">\n              <label>पाउनेको नाम</label>\n              <span *ngIf=\"chalaniForm.controls.chalaniDestName.invalid && chalaniForm.controls.chalaniDestName.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n              <input type=\"text\" class=\"form-control\" formControlName=\"chalaniDestName\" placeholder=\"\" required>\n            </div>\n            <div class=\"form-group col-3\">\n              <label>पाउनेको ठेगाना</label>\n              <span *ngIf=\"chalaniForm.controls.chalaniDestAddress.invalid && chalaniForm.controls.chalaniDestAddress.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n              <input type=\"text\" class=\"form-control\" formControlName=\"chalaniDestAddress\" id=\"chalaniDestAddress\" placeholder=\"\">\n            </div>\n          </div>\n          <div class=\"form-row\">\n            <div class=\"form-group col-md-3\">\n              <label>हुलाक/र.नं.</label>\n              <span *ngIf=\"chalaniForm.controls.chalaniHulakNo.invalid && chalaniForm.controls.chalaniHulakNo.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n              <input type=\"text\" class=\"form-control\" formControlName=\"chalaniHulakNo\" id=\"chalaniHulakNo\" placeholder=\"\">\n            </div>\n          </div>\n          <div class=\"form-row\">\n            <div class=\"form-group col-6\">\n              <label>विषय</label>\n              <span *ngIf=\"chalaniForm.controls.chalaniSubject.invalid && chalaniForm.controls.chalaniSubject.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n              <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"chalaniSubject\" placeholder=\"\" required></textarea>\n            </div>\n          </div>\n          <div class=\"form-row\">\n            <div class=\"form-group col-4\">\n              <label>कैफियत</label>\n              <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"chalaniRemarks\" placeholder=\"\"></textarea>\n            </div>\n          </div>\n          <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\" [disabled]=\"chalaniForm.controls.chalaniDestAddress.invalid == true || chalaniForm.controls.chalaniDestName.invalid == true || chalaniForm.controls.chalaniHulakNo.invalid == true || chalaniForm.controls.chalaniSubject.invalid == true || chalaniForm.controls.chalaniPages.invalid == true\">\n          <div id=\"errAlert\" style=\"color: red\" *ngIf=\"chalaniForm.invalid\n                      && chalaniForm.controls.chalaniPages.touched \n                      && chalaniForm.controls.chalaniDestName.touched\n                      && chalaniForm.controls.chalaniDestAddress.touched\n                      && chalaniForm.controls.chalaniHulakNo.touched\n                      && chalaniForm.controls.chalaniSubject.touched\">\n             {{errAlert}} \n          </div>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -428,6 +502,11 @@ module.exports = "<p>\n  chalani works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChalaniComponent", function() { return ChalaniComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var ngx_electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-electron */ "./node_modules/ngx-electron/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -438,10 +517,160 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
+var adbs = __webpack_require__(/*! ad-bs-converter */ "./node_modules/ad-bs-converter/src/converter.js");
+;
+;
 var ChalaniComponent = /** @class */ (function () {
-    function ChalaniComponent() {
+    function ChalaniComponent(fb, _electron, router) {
+        var _this = this;
+        this.fb = fb;
+        this._electron = _electron;
+        this.router = router;
+        this.errAlert = "तपाइले दिएको विवरण मिलेन | कृपया ( * ) भएका ठाउँलाई सच्याउनुहोस् | ";
+        this.star = "*";
+        // Initialize ParsedData
+        this.utsav = "Prabesh Chutiya";
+        this.dtOptions = {
+            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            select: true,
+            buttons: [
+                'excel',
+                'copy',
+            ]
+        };
+        this.flag = false;
+        this.chalaniList = null;
+        this.parsedData = {
+            chalaniNo: 1,
+            chalaniDate: "a",
+            chalaniPages: 1,
+            chalaniPagesDate: "a",
+            chalaniDestName: "a",
+            chalaniDestAddress: "a",
+            chalaniSubject: "a",
+            chalaniHulakNo: "a",
+            chalaniRemarks: "a"
+        };
+        this.navigationSubscription = this.router.events.subscribe(function (e) {
+            // If it is a NavigationEnd event re-initalise the component
+            if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_3__["NavigationEnd"]) {
+                _this.initialiseInvites();
+            }
+        });
     }
+    ChalaniComponent.prototype.initialiseInvites = function () {
+        // Set default values and re-fetch any data you need.
+        this.getChalani();
+        setTimeout(function () {
+        }, 400);
+    };
+    ChalaniComponent.prototype.ngOnDestroy = function () {
+        // avoid memory leaks here by cleaning up after ourselves. If we  
+        // don't then we will continue to run our initialiseInvites()   
+        // method on every navigationEnd event.
+        if (this.navigationSubscription) {
+            this.navigationSubscription.unsubscribe();
+        }
+    };
     ChalaniComponent.prototype.ngOnInit = function () {
+        this.getChalani();
+        setTimeout(function () {
+        }, 400);
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var YY = d.getFullYear();
+        var MM = (month < 10 ? '0' : '') + month;
+        var DD = (day < 10 ? '0' : '') + day;
+        var date = adbs.ad2bs(YY + "/" + MM + "/" + DD);
+        var convertedDate = date.en.year + "-" + date.en.month + "-" + date.en.day;
+        this.chalaniForm = this.fb.group({
+            chalaniNo: 0,
+            chalaniDate: convertedDate,
+            chalaniPages: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].min(1), _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].max(999)])],
+            chalaniPagesDate: convertedDate,
+            chalaniDestName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniDestAddress: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniHulakNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniSubject: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            chalaniRemarks: ''
+        });
+        console.log(this.chalaniForm.controls);
+        this.chalaniForm.valueChanges.subscribe(console.log);
+    };
+    ChalaniComponent.prototype.getChalani = function () {
+        var _this = this;
+        this._electron.ipcRenderer.send('listChalani', 'listchalani');
+        this._electron.ipcRenderer.on('chalaniListReceived', function (event, arg) {
+            _this.chalaniList = arg;
+            _this.parsedData = arg;
+            _this.flag = true;
+        });
+    };
+    ChalaniComponent.prototype.deleteChalani = function (data) {
+        this._electron.ipcRenderer.send('deleteChalani', data);
+        this._electron.ipcRenderer.on('chalaniDeleted', function (event, arg) {
+            console.log("deleted chalani");
+            // console.log(arg);
+        });
+        this.router.navigate(['chalani']);
+    };
+    ChalaniComponent.prototype.editChalani = function (val) {
+        var _dd, _dpd;
+        _dd = jQuery("#chalaniDate").val();
+        _dpd = jQuery("#chalaniPagesDate").val();
+        var _val = {
+            chalaniListSchema: {
+                chalaniNo: val.chalaniNo,
+                chalaniDate: val.chalaniDate,
+                chalaniPages: val.chalaniPages,
+                chalaniPagesDate: val.chalaniPagesDate,
+                chalaniDestName: val.chalaniDestName,
+                chalaniDestAddress: val.chalaniDestAddress,
+                chalaniSubject: val.chalaniSubject,
+                chalaniHulakNo: val.chalaniHulakNo,
+                chalaniRemarks: val.chalaniRemarks
+            },
+            chalaniDate: _dd,
+            chalaniPagesDate: _dpd,
+        };
+        console.log("Hello from addchalani");
+        console.log(_val);
+        console.log("edit");
+        console.log(val);
+        this._electron.ipcRenderer.send('editChalani', _val);
+        this._electron.ipcRenderer.on('chalaniEdited', function (event, arg) {
+            console.log("edited chalani");
+            // console.log(arg);
+        });
+        this.router.navigate(['chalani']);
+    };
+    ChalaniComponent.prototype.dataParse = function (data) {
+        jQuery('#chalaniDate').nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true
+        });
+        jQuery('#chalaniPagesDate').nepaliDatePicker({
+            dateFormat: "%y-%m-%d",
+            closeOnDateSelect: true
+        });
+        this.parsedData = data;
+        // console.log(this.parsedData);
+        this.chalaniForm.get('chalaniNo').setValue(this.parsedData.chalaniNo);
+        this.chalaniForm.get('chalaniDate').setValue(this.parsedData.chalaniDate);
+        this.chalaniForm.get('chalaniPages').setValue(this.parsedData.chalaniPages);
+        this.chalaniForm.get('chalaniPagesDate').setValue(this.parsedData.chalaniPagesDate);
+        this.chalaniForm.get('chalaniDestName').setValue(this.parsedData.chalaniDestName);
+        this.chalaniForm.get('chalaniDestAddress').setValue(this.parsedData.chalaniDestAddress);
+        this.chalaniForm.get('chalaniSubject').setValue(this.parsedData.chalaniSubject);
+        this.chalaniForm.get('chalaniHulakNo').setValue(this.parsedData.chalaniHulakNo);
+        this.chalaniForm.get('chalaniRemarks').setValue(this.parsedData.chalaniRemarks);
     };
     ChalaniComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -449,7 +678,7 @@ var ChalaniComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./chalani.component.html */ "./src/app/chalani/chalani.component.html"),
             styles: [__webpack_require__(/*! ./chalani.component.css */ "./src/app/chalani/chalani.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"], ngx_electron__WEBPACK_IMPORTED_MODULE_2__["ElectronService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], ChalaniComponent);
     return ChalaniComponent;
 }());
@@ -539,7 +768,7 @@ module.exports = "/* \r\ntable{\r\n    border-collapse:collapse; \r\n    table-l
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"flag\">\n    <div class=\"table-responsive-sm\">\n        <table datatable [dtOptions]=\"dtOptions\" dtInstance=\"dtInstance\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" class=\"table table-sm\">\n            <thead class=\"thead-dark\">\n                <tr>\n                    <th width=\"5%\">दर्ता नं</th>\n                    <th width=\"8%\">दर्ता मिति</th>\n                    <th width=\"7%\">पत्र संख्या</th>\n                    <th width=\"9%\">प्राप्त मिति</th>\n                    <th width=\"13%\">पठाउने अफिसको नाम</th>\n                    <th width=\"15%\">विषय</th>\n                    <th width=\"15%\">फाटको नाम</th>\n                    <th width=\"9%\">गएको मिति</th>\n                    <th width=\"13%\">कैफियत</th>\n                    <th width=\"3%\" class=\"no-arrow\"></th>\n                    <th width=\"3%\" class=\"no-arrow\"></th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let items of dartaList \" class=\"table-light\">\n                    <td width=\"5%\" class=\"table-light \">{{items.dartaNo}}</td>\n                    <td width=\"8%\" class=\"table-light \">{{items.dartaDate}}</td>\n                    <td width=\"7%\" class=\"table-light \">{{items.dartaPages}}</td>\n                    <td width=\"9%\" class=\"table-light \">{{items.dartaPagesDate}}</td>\n                    <td width=\"13%\" class=\"table-light \">{{items.dartaAddress}}</td>\n                    <td width=\"15%\" class=\"table-light \">{{items.dartaSubject}}</td>\n                    <td width=\"15%\" class=\"table-light \">{{items.dartaDeptName}}</td>\n                    <td width=\"9%\" class=\"table-light \">{{items.dartaDeptDate}}</td>\n                    <td width=\"13%\" class=\"table-light \">{{items.dartaRemarks}}</td>\n                    <th width=\"3%\">\n                        <button (click)=\"dataParse(items)\" data-toggle=\"modal\" data-target=\"#editDarta\" class=\"btn btn-success btn-sm\">\n                            <i class=\"fas fa-edit\"></i>\n                        </button>\n                    </th>\n                    <th width=\"3%\">\n                        <button (click)=\"deleteDarta(items)\" class=\"btn btn-danger btn-sm\">\n                            <i class=\"fas fa-trash-alt\"></i>\n                        </button>\n                    </th>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>\n<div class=\"modal fade\" id=\"editDarta\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalTitle\">\n    <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"modalTitle\">दर्ता सम्पादन</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\" id=\"modal\">\n                <form [formGroup]=\"dartaForm\" (ngSubmit)=\"editDarta(dartaForm.value)\" id=\"editForm\">\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-md-3\">\n                            <label>दर्ता नं.</label>\n                            <input type=\"number\" class=\"form-control\" formControlName=\"dartaNo\" disabled placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-md-3\">\n                            <label>दर्ता मिति</label>\n                            <input type=\"text\" class=\"form-control\" id=\"dartaDateEdit\" formControlName=\"dartaDate\" placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-md-3\">\n                            <label>प्राप्त भएको पत्र संख्या</label>\n                            <span *ngIf=\"dartaForm.controls.dartaPages.invalid && dartaForm.controls.dartaPages.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <input type=\"number\" class=\"form-control\" formControlName=\"dartaPages\" placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-md-3\">\n                            <label>प्राप्त भएको पत्रको मिति</label>\n                            <input type=\"text\" class=\"form-control\" id=\"dartaPagesDateEdit\" formControlName=\"dartaPagesDate\" placeholder=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-md-4\">\n                            <label>पठाउने अफिसको नाम</label>\n                            <span *ngIf=\"dartaForm.controls.dartaAddress.invalid && dartaForm.controls.dartaAddress.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <input type=\"text\" class=\"form-control\" formControlName=\"dartaAddress\" placeholder=\"\" required>\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-6\">\n                            <label>विषय</label>\n                            <span *ngIf=\"dartaForm.controls.dartaSubject.invalid && dartaForm.controls.dartaSubject.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"dartaSubject\" placeholder=\"\" required></textarea>\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-3\">\n                            <label>बुझिलिने फाटवालाको नाम</label>\n                            <span *ngIf=\"dartaForm.controls.dartaDeptName.invalid && dartaForm.controls.dartaDeptName.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <input type=\"text\" class=\"form-control\" formControlName=\"dartaDeptName\" placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-3\">\n                            <label>मिति</label>\n                            <input type=\"text\" class=\"form-control\" id=\"dartaDeptDateEdit\" formControlName=\"dartaDeptDate\" placeholder=\"\" required>\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-4\">\n                            <label>कैफियत</label>\n                            <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"dartaRemarks\" placeholder=\"\"></textarea>\n                        </div>\n                    </div>\n                    <div id=\"errAlert\" style=\"color: red\" *ngIf=\"dartaForm.invalid\n                                                                                && dartaForm.controls.dartaPages.touched \n                                                                                &&  dartaForm.controls.dartaAddress.touched \n                                                                                && dartaForm.controls.dartaDeptName.touched\n                                                                                && dartaForm.controls.dartaSubject.touched \n                                                                                && dartaForm.controls.dartaRemarks.touched\">\n                        {{errAlert}}\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Close</button>\n                        <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\" [disabled]=\"dartaForm.controls.dartaAddress.invalid == true || dartaForm.controls.dartaDeptName.invalid == true || dartaForm.controls.dartaSubject.invalid == true || dartaForm.controls.dartaPages.invalid == true\">\n                    </div>\n                </form>\n            </div>\n        </div>\n    </div>\n</div>\n    "
+module.exports = "<div *ngIf=\"flag\">\n    <div class=\"table-responsive-sm\">\n        <table datatable [dtOptions]=\"dtOptions\" dtInstance=\"dtInstance\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" class=\"table table-sm\">\n            <thead class=\"thead-dark\">\n                <tr>\n                    <th width=\"5%\">दर्ता नं</th>\n                    <th width=\"8%\">दर्ता मिति</th>\n                    <th width=\"7%\">पत्र संख्या</th>\n                    <th width=\"9%\">प्राप्त मिति</th>\n                    <th width=\"13%\">पठाउने अफिसको नाम</th>\n                    <th width=\"15%\">विषय</th>\n                    <th width=\"15%\">फाटको नाम</th>\n                    <th width=\"9%\">गएको मिति</th>\n                    <th width=\"13%\">कैफियत</th>\n                    <th width=\"3%\" class=\"no-arrow\"></th>\n                    <th width=\"3%\" class=\"no-arrow\"></th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let items of dartaList \" class=\"table-light\">\n                    <td width=\"5%\" class=\"table-light \">{{items.dartaNo}}</td>\n                    <td width=\"8%\" class=\"table-light \">{{items.dartaDate}}</td>\n                    <td width=\"7%\" class=\"table-light \">{{items.dartaPages}}</td>\n                    <td width=\"9%\" class=\"table-light \">{{items.dartaPagesDate}}</td>\n                    <td width=\"13%\" class=\"table-light \">{{items.dartaAddress}}</td>\n                    <td width=\"15%\" class=\"table-light \">{{items.dartaSubject}}</td>\n                    <td width=\"15%\" class=\"table-light \">{{items.dartaDeptName}}</td>\n                    <td width=\"9%\" class=\"table-light \">{{items.dartaDeptDate}}</td>\n                    <td width=\"13%\" class=\"table-light \">{{items.dartaRemarks}}</td>\n                    <th width=\"3%\">\n                        <button (click)=\"dataParse(items)\" data-toggle=\"modal\" data-target=\"#editDarta\" class=\"btn btn-success btn-sm\">\n                            <i class=\"fas fa-edit\"></i>\n                        </button>\n                    </th>\n                    <th width=\"3%\">\n                        <button (click)=\"deleteDarta(items)\" class=\"btn btn-danger btn-sm\">\n                            <i class=\"fas fa-trash-alt\"></i>\n                        </button>\n                    </th>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>\n<div class=\"modal fade\" id=\"editDarta\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalTitle\">\n    <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"modalTitle\">दर्ता सम्पादन</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\" id=\"modal\">\n                <form [formGroup]=\"dartaForm\" (ngSubmit)=\"editDarta(dartaForm.value)\" id=\"editForm\">\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-md-3\">\n                            <label>दर्ता नं.</label>\n                            <input type=\"number\" class=\"form-control\" formControlName=\"dartaNo\" disabled placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-md-3\">\n                            <label>दर्ता मिति</label>\n                            <input type=\"text\" class=\"form-control\" id=\"dartaDateEdit\" formControlName=\"dartaDate\" placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-md-3\">\n                            <label>प्राप्त भएको पत्र संख्या</label>\n                            <span *ngIf=\"dartaForm.controls.dartaPages.invalid && dartaForm.controls.dartaPages.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <input type=\"number\" class=\"form-control\" formControlName=\"dartaPages\" placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-md-3\">\n                            <label>प्राप्त भएको पत्रको मिति</label>\n                            <input type=\"text\" class=\"form-control\" id=\"dartaPagesDateEdit\" formControlName=\"dartaPagesDate\" placeholder=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-md-4\">\n                            <label>पठाउने अफिसको नाम</label>\n                            <span *ngIf=\"dartaForm.controls.dartaAddress.invalid && dartaForm.controls.dartaAddress.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <input type=\"text\" class=\"form-control\" formControlName=\"dartaAddress\" placeholder=\"\" required>\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-6\">\n                            <label>विषय</label>\n                            <span *ngIf=\"dartaForm.controls.dartaSubject.invalid && dartaForm.controls.dartaSubject.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"dartaSubject\" placeholder=\"\" required></textarea>\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-3\">\n                            <label>बुझिलिने फाटवालाको नाम</label>\n                            <span *ngIf=\"dartaForm.controls.dartaDeptName.invalid && dartaForm.controls.dartaDeptName.touched\" style=\"color: red\">&nbsp; &nbsp;*</span>\n                            <input type=\"text\" class=\"form-control\" formControlName=\"dartaDeptName\" placeholder=\"\" required>\n                        </div>\n                        <div class=\"form-group col-3\">\n                            <label>मिति</label>\n                            <input type=\"text\" class=\"form-control\" id=\"dartaDeptDateEdit\" formControlName=\"dartaDeptDate\" placeholder=\"\" required>\n                        </div>\n                    </div>\n                    <div class=\"form-row\">\n                        <div class=\"form-group col-4\">\n                            <label>कैफियत</label>\n                            <textarea type=\"text\" class=\"form-control\" rows=\"3\" formControlName=\"dartaRemarks\" placeholder=\"\"></textarea>\n                        </div>\n                    </div>\n                    <div id=\"errAlert\" style=\"color: red\" \n                        *ngIf=\"dartaForm.invalid\n                                && dartaForm.controls.dartaPages.touched \n                                &&  dartaForm.controls.dartaAddress.touched \n                                && chalaniForm.controls.dartaDeptName.touched\n                                && dartaForm.controls.dartaSubject.touched \n                                && dartaForm.controls.dartaRemarks.touched\">\n                        {{errAlert}}\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Close</button>\n                        <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\" [disabled]=\"dartaForm.controls.dartaAddress.invalid == true || dartaForm.controls.dartaDeptName.invalid == true || dartaForm.controls.dartaSubject.invalid == true || dartaForm.controls.dartaPages.invalid == true\">\n                    </div>\n                </form>\n            </div>\n        </div>\n    </div>\n</div>\n    "
 
 /***/ }),
 

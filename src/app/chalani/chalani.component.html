@@ -1,3 +1,120 @@
-<p>
-  chalani works!
-</p>
+<div *ngIf="flag">
+  <div class="table-responsive-sm">
+    <table datatable [dtOptions]="dtOptions" dtInstance="dtInstance" width="100%" cellspacing="0" cellpadding="0" class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th width="5%">चलानी नं</th>
+          <th width="8%">चलानी मिति</th>
+          <th width="7%">पत्र संख्या</th>
+          <th width="9%">चलानी पत्र मिति</th>
+          <th width="13%">पाउने अफिसको नाम</th>
+          <th width="14%">ठेगाना</th>
+          <th width="13%">विषय</th>
+          <th width="5%">हुलाक/र.नं.</th>
+          <th width="10%">कैफियत</th>
+          <th width="3%" class="no-arrow"></th>
+          <th width="3%" class="no-arrow"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let items of chalaniList " class="table-light">
+          <td width="5%" class="table-light ">{{items.chalaniNo}}</td>
+          <td width="8%" class="table-light ">{{items.chalaniDate}}</td>
+          <td width="7%" class="table-light ">{{items.chalaniPages}}</td>
+          <td width="9%" class="table-light ">{{items.chalaniPagesDate}}</td>
+          <td width="13%" class="table-light ">{{items.chalaniDestName}}</td>
+          <td width="13%" class="table-light ">{{items.chalaniDestAddress}}</td>
+          <td width="14%" class="table-light ">{{items.chalaniSubject}}</td>
+          <td width="5%" class="table-light ">{{items.chalaniHulakNo}}</td>
+          <td width="10%" class="table-light ">{{items.chalaniRemarks}}</td>
+          <th width="3%">
+            <button (click)="dataParse(items)" data-toggle="modal" data-target="#editChalani" class="btn btn-success btn-sm">
+              <i class="fas fa-edit"></i>
+            </button>
+          </th>
+          <th width="3%">
+            <button (click)="deleteChalani(items)" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" id="editChalani" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">दर्ता सम्पादन</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal">
+        <form [formGroup]="chalaniForm" (ngSubmit)="editChalani(chalaniForm.value)">
+          <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>चलानी नं.</label>
+                <input type="number" class="form-control" formControlName="chalaniNo" disabled placeholder="">
+              </div>
+            <div class="form-group col-md-3">
+              <label>चलानी मिति</label>
+              <input type="text" id="chalaniDate" class="form-control" formControlName="chalaniDate" placeholder="" required>
+            </div>
+            <div class="form-group col-md-3">
+              <label>चलानी पत्र संख्या</label>
+              <span *ngIf="chalaniForm.controls.chalaniPages.invalid && chalaniForm.controls.chalaniPages.touched" style="color: red">&nbsp; &nbsp;*</span>
+              <input type="number" class="form-control" formControlName="chalaniPages" placeholder="" required>
+            </div>
+            <div class="form-group col-md-3">
+              <label>चलानी पत्र मिति</label>
+              <input type="text" id="chalaniPagesDate" class="form-control" formControlName="chalaniPagesDate" placeholder="" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label>पाउनेको नाम</label>
+              <span *ngIf="chalaniForm.controls.chalaniDestName.invalid && chalaniForm.controls.chalaniDestName.touched" style="color: red">&nbsp; &nbsp;*</span>
+              <input type="text" class="form-control" formControlName="chalaniDestName" placeholder="" required>
+            </div>
+            <div class="form-group col-3">
+              <label>पाउनेको ठेगाना</label>
+              <span *ngIf="chalaniForm.controls.chalaniDestAddress.invalid && chalaniForm.controls.chalaniDestAddress.touched" style="color: red">&nbsp; &nbsp;*</span>
+              <input type="text" class="form-control" formControlName="chalaniDestAddress" id="chalaniDestAddress" placeholder="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label>हुलाक/र.नं.</label>
+              <span *ngIf="chalaniForm.controls.chalaniHulakNo.invalid && chalaniForm.controls.chalaniHulakNo.touched" style="color: red">&nbsp; &nbsp;*</span>
+              <input type="text" class="form-control" formControlName="chalaniHulakNo" id="chalaniHulakNo" placeholder="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label>विषय</label>
+              <span *ngIf="chalaniForm.controls.chalaniSubject.invalid && chalaniForm.controls.chalaniSubject.touched" style="color: red">&nbsp; &nbsp;*</span>
+              <textarea type="text" class="form-control" rows="3" formControlName="chalaniSubject" placeholder="" required></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label>कैफियत</label>
+              <textarea type="text" class="form-control" rows="3" formControlName="chalaniRemarks" placeholder=""></textarea>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-primary" value="Submit" [disabled]="chalaniForm.controls.chalaniDestAddress.invalid == true || chalaniForm.controls.chalaniDestName.invalid == true || chalaniForm.controls.chalaniHulakNo.invalid == true || chalaniForm.controls.chalaniSubject.invalid == true || chalaniForm.controls.chalaniPages.invalid == true">
+          <div id="errAlert" style="color: red" *ngIf="chalaniForm.invalid
+                      && chalaniForm.controls.chalaniPages.touched 
+                      && chalaniForm.controls.chalaniDestName.touched
+                      && chalaniForm.controls.chalaniDestAddress.touched
+                      && chalaniForm.controls.chalaniHulakNo.touched
+                      && chalaniForm.controls.chalaniSubject.touched">
+             {{errAlert}} 
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
