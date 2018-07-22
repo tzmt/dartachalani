@@ -1,4 +1,3 @@
-const electorn=require('electron');
 const {app, BrowserWindow, ipcMain} = require('electron');
 const url = require('url');
 const path = require('path');
@@ -13,12 +12,6 @@ let win;
 
 function createMainWindow() {
     win = new BrowserWindow({ title: "Darta Chalani"});
-
-    // win.loadURL(url.format({
-    //     pathname: path.join(__dirname, 'app.asar','index.html'),
-    //     protocol: 'file:',
-    //     slashes: true
-    // }))
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, '/build/index.html'),
@@ -57,7 +50,6 @@ app.on('activate', () => {
     if (win === null) {
         createWindow()
     }
-    console.log(__dirname);
 })
 
 ipcMain.on('newDarta', (event, arg) => {
@@ -66,11 +58,11 @@ ipcMain.on('newDarta', (event, arg) => {
         db.run(`INSERT INTO darta(dartaDate, dartaPages, dartaPagesDate, dartaAddress, dartaSubject, dartaDeptName, dartaDeptDate, dartaRemarks) VALUES ("${arg.dartaDate}", ${arg.dartaListSchema.dartaPages}, "${arg.dartaPagesDate}", "${arg.dartaListSchema.dartaAddress}", "${arg.dartaListSchema.dartaSubject}", "${arg.dartaListSchema.dartaDeptName}", "${arg.dartaDeptDate}", "${arg.dartaListSchema.dartaRemarks}" )`);
         }
     )
-    console.log("Darta done");
+    // console.log("Darta done");
 });
 
 ipcMain.on('listDarta', (event, arg) => {
-    db.all("SELECT * from darta;", function (err, row) {
+    db.all("SELECT * from darta ORDER BY dartaNo DESC;", function (err, row) {
         console.log("List all Darta");
         console.log("*****");
         event.sender.send('dartaListReceived', row);
@@ -78,7 +70,7 @@ ipcMain.on('listDarta', (event, arg) => {
 })
 
 ipcMain.on('deleteDarta', (event, arg) => {
-    console.log(JSON.stringify(arg));
+    // console.log(JSON.stringify(arg));
     db.serialize(function () {
         db.run(`DELETE FROM darta WHERE dartaNo=${arg.dartaNo} AND dartaDate="${arg.dartaDate}";`);
     });
@@ -86,10 +78,13 @@ ipcMain.on('deleteDarta', (event, arg) => {
 })
 
 ipcMain.on('editDarta', (event, arg) => {
-    console.log(arg);
+    // console.log(arg);
+    // console.log(arg.dartaDate);
+    // console.log(arg.dartaListSchema.dartaNo);
+    // console.log(arg.dartaDate);
     db.serialize(function () {
         // db.run(`UPDATE darta SET dartaDate = "${arg.dartaDate}",  dartaPages=${arg.dartaPages}, dartaPagesDate="${arg.dartaPagesDate}", dartaAddress="${arg.dartaAddress}", dartaSubject="${arg.dartaSubject}", dartaDeptName="${arg.dartaDeptName}", dartaDeptDate="${arg.dartaDeptDate}", dartaRemarks="${arg.dartaRemarks}" WHERE dartaNo=${arg.dartaNo} AND dartaDate="${arg.dartaDate}";`);
-        db.run(`UPDATE darta SET dartaNo=${arg.dartaListSchema.dartaNo}, dartaDate="${arg.dartaDate}",  dartaPages=${arg.dartaListSchema.dartaPages}, dartaPagesDate="${arg.dartaPagesDate}", dartaAddress="${arg.dartaListSchema.dartaAddress}", dartaSubject="${arg.dartaListSchema.dartaSubject}", dartaDeptName="${arg.dartaListSchema.dartaDeptName}", dartaDeptDate="${arg.dartaDeptDate}", dartaRemarks="${arg.dartaListSchema.dartaRemarks}" WHERE dartaNo=${arg.dartaListSchema.dartaNo} AND dartaDate="${arg.dartaDate}";`);
+        db.run(`UPDATE darta SET dartaNo=${arg.dartaListSchema.dartaNo}, dartaDate="${arg.dartaDate}",  dartaPages=${arg.dartaListSchema.dartaPages}, dartaPagesDate="${arg.dartaPagesDate}", dartaAddress="${arg.dartaListSchema.dartaAddress}", dartaSubject="${arg.dartaListSchema.dartaSubject}", dartaDeptName="${arg.dartaListSchema.dartaDeptName}", dartaDeptDate="${arg.dartaDeptDate}", dartaRemarks="${arg.dartaListSchema.dartaRemarks}" WHERE dartaNo=${arg.dartaListSchema.dartaNo};`);
     });
     event.sender.send('dartaEdited', arg);
 })
@@ -100,11 +95,11 @@ ipcMain.on('newChalani', (event, arg) => {
         db.run(`INSERT INTO chalani(chalaniDate, chalaniPages, chalaniPagesDate, chalaniDestName, chalaniDestAddress, chalaniSubject, chalaniHulakNo, chalaniRemarks) VALUES ("${arg.chalaniDate}", ${arg.chalaniListSchema.chalaniPages}, "${arg.chalaniPagesDate}", "${arg.chalaniListSchema.chalaniDestName}","${arg.chalaniListSchema.chalaniDestAddress}", "${arg.chalaniListSchema.chalaniSubject}", "${arg.chalaniListSchema.chalaniHulakNo}", "${arg.chalaniListSchema.chalaniRemarks}" )`);
     }
     )
-    console.log("Chalani done");
+    // console.log("Chalani done");
 });
 
 ipcMain.on('listChalani', (event, arg) => {
-    db.all("SELECT * from chalani;", function (err, row) {
+    db.all("SELECT * from chalani ORDER BY chalaniNo DESC;", function (err, row) {
         console.log("List all chalani");
         console.log("*****");
         event.sender.send('chalaniListReceived', row);
@@ -112,7 +107,7 @@ ipcMain.on('listChalani', (event, arg) => {
 })
 
 ipcMain.on('deleteChalani', (event, arg) => {
-    console.log(JSON.stringify(arg));
+    // console.log(JSON.stringify(arg));
     db.serialize(function () {
         db.run(`DELETE FROM chalani WHERE chalaniNo=${arg.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
     });
@@ -120,10 +115,27 @@ ipcMain.on('deleteChalani', (event, arg) => {
 })
 
 ipcMain.on('editChalani', (event, arg) => {
-    console.log(arg);
+    // console.log(arg);
     db.serialize(function () {
         // db.run(`UPDATE chalani SET chalaniDate = "${arg.chalaniDate}",  chalaniPages=${arg.chalaniPages}, chalaniPagesDate="${arg.chalaniPagesDate}", chalaniAddress="${arg.chalaniAddress}", chalaniSubject="${arg.chalaniSubject}", chalaniDeptName="${arg.chalaniDeptName}", chalaniDeptDate="${arg.chalaniDeptDate}", chalaniRemarks="${arg.chalaniRemarks}" WHERE chalaniNo=${arg.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
-        db.run(`UPDATE chalani SET chalaniNo=${arg.chalaniListSchema.chalaniNo}, chalaniDate="${arg.chalaniDate}",  chalaniPages=${arg.chalaniListSchema.chalaniPages}, chalaniPagesDate="${arg.chalaniPagesDate}", chalaniDestName="${arg.chalaniListSchema.chalaniDestName}", chalaniDestAddress="${arg.chalaniListSchema.chalaniDestAddress}", chalaniSubject="${arg.chalaniListSchema.chalaniSubject}", chalaniHulakNo="${arg.chalaniListSchema.chalaniHulakNo}", chalaniRemarks="${arg.chalaniListSchema.chalaniRemarks}" WHERE chalaniNo=${arg.chalaniListSchema.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
+        db.run(`UPDATE chalani SET chalaniNo=${arg.chalaniListSchema.chalaniNo}, chalaniDate="${arg.chalaniDate}",  chalaniPages=${arg.chalaniListSchema.chalaniPages}, chalaniPagesDate="${arg.chalaniPagesDate}", chalaniDestName="${arg.chalaniListSchema.chalaniDestName}", chalaniDestAddress="${arg.chalaniListSchema.chalaniDestAddress}", chalaniSubject="${arg.chalaniListSchema.chalaniSubject}", chalaniHulakNo="${arg.chalaniListSchema.chalaniHulakNo}", chalaniRemarks="${arg.chalaniListSchema.chalaniRemarks}" WHERE chalaniNo=${arg.chalaniListSchema.chalaniNo};`);
     });
+    // console.log("Chalani Edited");
     event.sender.send('chalaniEdited', arg);
+})
+
+ipcMain.on('listUsers', (event, arg) => {
+    db.all("SELECT * from users;", function (err, row) {
+        console.log("Userlist sent");
+        console.log("*****");
+        event.sender.send('usersListReceived', row);
+    });
+})
+ipcMain.on('updatePassword', (event, arg) => {
+    // console.log(arg);
+    db.serialize(function () {
+        // db.run(`UPDATE chalani SET chalaniDate = "${arg.chalaniDate}",  chalaniPages=${arg.chalaniPages}, chalaniPagesDate="${arg.chalaniPagesDate}", chalaniAddress="${arg.chalaniAddress}", chalaniSubject="${arg.chalaniSubject}", chalaniDeptName="${arg.chalaniDeptName}", chalaniDeptDate="${arg.chalaniDeptDate}", chalaniRemarks="${arg.chalaniRemarks}" WHERE chalaniNo=${arg.chalaniNo} AND chalaniDate="${arg.chalaniDate}";`);
+        db.run(`UPDATE users SET password="${arg}";`);
+    });
+    // console.log("Password Updated");
 })

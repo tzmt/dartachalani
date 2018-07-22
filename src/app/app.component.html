@@ -1,68 +1,106 @@
-<div class="wrapper">
-  <!-- Sidebar Holder -->
-  <nav id="sidebar">
-    <div class="sidebar-header">
-      <button type="button" id="sidebarCollapse" class="btn btn-link">
-        <i class="fas fa-bars fa-lg"></i>
-      </button>
+<div id="big-wrapper">
+  <div id="pre-login">
+    <div id="login-wrapper">
+      <img src="assets/logo.png" height="60px" width="60px">
+      <br>
+      <div id="errAlert" *ngIf="this.loginFlag" class="text-danger" style="font-size: 9px">{{errAlert}}</div>
+      <form id="loginForm" #loginForm="ngForm">
+        <div class="form-group text-center">
+          <div class="inputs">
+            <input type="text" placeholder="Username" class="form-control" [(ngModel)]="_username" name="_username">
+            <input type="password" placeholder="Password" class="form-control" [(ngModel)]="_password" name="_password">
+          </div>
+          <br>
+          <input type="button" class="btn btn-primary" id="signInButton" value="Log In" (click)="onSignIn();loginForm.reset();">
+        </div>
+      </form>
     </div>
-    <div class="menuItems">
-      <ul class="list-unstyled">
-        <li>
-          <a href="#dartaSubmenu" data-toggle="collapse">
-            <i class="fas fa-sign-in-alt"></i>
-             दर्ता
-          </a>
-          <ul class="collapse list-unstyled text-left" id="dartaSubmenu">
+  </div>
+  
+  <div id="post-login" class="hide">
+    <div class="wrapper">
+      <!-- Sidebar Holder -->
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <button type="button" id="sidebarCollapse" class="btn btn-link">
+            <i class="fas fa-bars fa-lg"></i>
+          </button>
+        </div>
+        <div class="menuItems">
+          <ul class="list-unstyled">
             <li>
-              <a routerLink="/add-darta" routerLinkActive="active">नयाँ</a>
+              <a href="#dartaSubmenu" data-toggle="collapse">
+                <i class="fas fa-sign-in-alt"></i>
+                दर्ता
+              </a>
+              <ul class="collapse list-unstyled text-left" id="dartaSubmenu">
+                <li>
+                  <a routerLink="/add-darta" routerLinkActive="active">नयाँ</a>
+                </li>
+                <li>
+                  <a routerLink="/darta" routerLinkActive="active">दर्ताको सूची</a>
+                </li>
+              </ul>
             </li>
             <li>
-              <a routerLink="/darta" routerLinkActive="active">दर्ताको सूची</a>
-            </li>
-            <li>
-              <a routerLink="/search-darta" routerLinkActive="active">खोज</a>
+              <a href="#chalaniSubmenu" data-toggle="collapse">
+                <i class="fas fa-sign-out-alt"></i>
+                चलानी
+              </a>
+              <ul class="collapse list-unstyled" id="chalaniSubmenu">
+                <li>
+                  <a routerLink="/add-chalani" routerLinkActive="active">नयाँ</a>
+                </li>
+                <li>
+                  <a routerLink="/chalani" routerLinkActive="active">चलानिको सूची</a>
+                </li>
+              </ul>
             </li>
           </ul>
-        </li>
-        <li>
-          <a href="#chalaniSubmenu" data-toggle="collapse">
-            <i class="fas fa-sign-out-alt"></i>
-            चलानी
-          </a>
-          <ul class="collapse list-unstyled" id="chalaniSubmenu">
-            <li>
-              <a routerLink="/add-chalani" routerLinkActive="active">नयाँ</a>
-            </li>
-            <li>
-              <a routerLink="/chalani" routerLinkActive="active">चलानिको सूची</a>
-            </li>
-            <li>
-              <a routerLink="/search-chalani" routerLinkActive="active">खोज</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    
-    
-  </nav>
-
-  <!-- Page Content Holder -->
-  <div id="content" >
-      <nav class="navbar justify-content-end navbar-dark bg-dark">
-          <a routerLink="/" routerLinkActive="active" class="nav-link">ड्यासबोर्ड</a>
-          <a routerLink="/settings" routerLinkActive="active" class="nav-link">सेटिग्स</a>
-          <a routerLink="/profile" routerLinkActive="active" class="nav-link">प्रोफाइल</a>        
+        </div>
+  
+  
       </nav>
-    <div id="routerContent">
-      <router-outlet></router-outlet>
+  
+      <!-- Page Content Holder -->
+      <div id="content">
+        <nav class="navbar justify-content-end navbar-dark bg-dark">
+          <a routerLink="/" routerLinkActive="active" class="nav-link">ड्यासबोर्ड</a>
+          <input type="button" class="btn btn-success btn-sm nav-link" value="पासवोर्ड परिवर्तन" (click)="togglePasswordChange()">
+          <p>&nbsp;&nbsp;</p>
+          <input type="button" class="btn btn-danger btn-sm nav-link" value="Log Out" (click)="logOut()">
+        </nav>
+        <div id="routerContent">
+          <router-outlet></router-outlet>
+        </div>
+        <!-- <div style="position: inline-block">
+          <img src="assets/Emblem_of_Nepal.svg" style="position: absolute;bottom: 40px;right: 30px; height: 60px;width:63px;">
+        </div> -->
+      </div>
     </div>
-    <!-- <div style="position: inline-block">
-        <img src="assets/Emblem_of_Nepal.svg" style="position: absolute;bottom: 40px;right: 30px; height: 60px;width:63px;">
-    </div> -->
+    <footer class="fixed-bottom">
+      (c) सर्वाधिकार सुरक्षित, तित्रा इनोभेसन सेन्टर, बि.सं २०७५ | तकिनिकी सहायता सम्पर्क : ०९१-५२२७५७
+    </footer>
+  </div>
+
+  <div id="changePassword" class="hide">
+    <div id="login-wrapper">
+      <img src="assets/logo.png" height="60px" width="60px">
+      <br>
+      <div id="errAlert" *ngIf="this.changePasswordFlag" class="text-danger" style="font-size: 9px">{{errAlertPass}}</div>
+      <form id="changePasswordForm" #changePasswordForm="ngForm">
+        <div class="form-group text-center">
+          <div class="inputs">
+            <input type="text" placeholder="Username" class="form-control" [(ngModel)]="_oldusername" name="_oldusername">
+            <input type="password" placeholder="पुरानो पासवोर्ड" class="form-control" [(ngModel)]="_oldpassword" name="_oldpassword">
+            <input type="password" placeholder="नयाँ पासवोर्ड" class="form-control" [(ngModel)]="_newpassword1" name="_newpassword1">
+            <input type="password" placeholder="पुनः नयाँ पासवोर्ड" class="form-control" [(ngModel)]="_newpassword2" name="_newpassword2">
+          </div>
+          <br>
+          <input type="button" class="form-control btn btn-primary" id="changePasswordButton" value="Update Password" (click)="changePassword();changePasswordForm.reset()">
+          <input type="button" class="form-control btn btn-danger" id="closeChangePasswordButton" value="Back" (click)="toggleClassLogIn()">
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-<footer class="fixed-bottom">
-Well, Hello there matey! I am footer.
-</footer>

@@ -72,7 +72,8 @@ export class DartaComponent implements OnInit,OnDestroy {
     buttons: [
       'excel',
       'copy',
-    ]
+    ],
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
   };
   flag:boolean = false;
   dartaList: dartaListSchema = null;
@@ -147,8 +148,8 @@ export class DartaComponent implements OnInit,OnDestroy {
     });
   }
 
-  deleteDarta(data){
-    this._electron.ipcRenderer.send('deleteDarta', data);
+  deleteDarta(){
+    this._electron.ipcRenderer.send('deleteDarta', this.parsedData);
     this._electron.ipcRenderer.on('dartaDeleted',(event, arg)=>{
       console.log("deleted Darta");
       // console.log(arg);
@@ -157,14 +158,14 @@ export class DartaComponent implements OnInit,OnDestroy {
   }
   
   editDarta(val){
-    var _dd, _ddd, _dpd;
-    _dd = jQuery("#dartaDateEdit").val();
-    _ddd = jQuery("#dartaDeptDateEdit").val();
-    _dpd = jQuery("#dartaPagesDateEdit").val();
+    var _dd1, _ddd1, _dpd1;
+    _dd1 = jQuery("#dartaDateEdit").val();
+    _ddd1 = jQuery("#dartaDeptDateEdit").val();
+    _dpd1 = jQuery("#dartaPagesDateEdit").val();
     console.log("Values from jquery");
-    console.log(_dd);
-    console.log(_ddd);
-    console.log(_dpd);
+    console.log(_dd1);
+    console.log(_ddd1);
+    console.log(_dpd1);
     var _val: darta_with_dates = {
       dartaListSchema: {
         dartaNo: val.dartaNo,
@@ -177,9 +178,9 @@ export class DartaComponent implements OnInit,OnDestroy {
         dartaDeptDate: val.dartaDeptDate,
         dartaRemarks: val.dartaRemarks
       },
-      dartaDate: _dd,
-      dartaPagesDate: _dpd,
-      dartaDeptDate: _ddd,
+      dartaDate: _dd1,
+      dartaPagesDate: _dpd1,
+      dartaDeptDate: _ddd1,
     }
     console.log("Hello from addDarta");
     console.log(_val);

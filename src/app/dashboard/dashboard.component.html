@@ -1,3 +1,68 @@
-<p>
-  dashboard works!
-</p>
+<div class="container-fluid">
+
+  <div class="jumbotron row">
+    <div class="col-10"> 
+      <h2 class="align-middle">तित्रा इनोभेसन सेन्टर</h2>
+      <h3 class="align-middle">धनगढी -४, कैलाली</h3>
+    </div>
+    <div class="col">
+      <img src="assets/logo.png" class="align-middle">
+    </div>
+    
+  </div>
+
+  <div class="row">
+    
+    <div class="col" id="darta-container">
+      <div *ngIf="flag">
+        <div class="table-responsive-sm">
+          <table datatable [dtOptions]="dtOptions" dtInstance="dtInstance" width="100%" cellspacing="0" cellpadding="0" class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th width="15%">दर्ता नं</th>
+                <th width="20%">दर्ता मिति</th>
+                <th width="30%">पठाउने अफिसको नाम</th>
+                <th width="35%">विषय</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let items of dartaList " class="table-light">
+                <td width="15%" class="table-light ">{{items.dartaNo}}</td>
+                <td width="20%" class="table-light ">{{items.dartaDate}}</td>
+                <td width="30%" class="table-light ">{{items.dartaAddress}}</td>
+                <td width="35%" class="table-light ">{{items.dartaSubject}}</td>                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="chalani-container">
+      <div *ngIf="flag">
+        <div class="table-responsive-sm">
+          <table datatable [dtOptions]="dtOptions" dtInstance="dtInstance" width="100%" cellspacing="0" cellpadding="0" class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th width="15%">चलानी नं</th>
+                <th width="20%">चलानी मिति</th>
+                <th width="30%">पाउने अफिसको नाम</th>
+                <th width="35%">विषय</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let items of chalaniList " class="table-light">
+                <td width="15%" class="table-light ">{{items.chalaniNo}}</td>
+                <td width="20%" class="table-light ">{{items.chalaniDate}}</td>
+                <td width="30%" class="table-light ">{{items.chalaniDestName}}</td>
+                <td width="35%" class="table-light ">{{items.chalaniSubject}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

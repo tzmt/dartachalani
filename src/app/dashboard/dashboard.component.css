@@ -1,0 +1,11 @@
+img{
+    height: 90px;
+    width: 107px;
+    position: relative;
+}
+.dataTables_wrapper .myfilter .dataTables_filter {
+    float:left
+}
+.dataTables_wrapper .mylength .dataTables_length {
+    float:right
+}

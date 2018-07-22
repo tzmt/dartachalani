@@ -63,7 +63,8 @@ export class ChalaniComponent implements OnInit {
     buttons: [
       'excel',
       'copy',
-    ]
+    ],
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
   };
   flag: boolean = false;
   chalaniList: chalaniListSchema = null;
@@ -142,8 +143,8 @@ export class ChalaniComponent implements OnInit {
     });
   }
 
-  deleteChalani(data) {
-    this._electron.ipcRenderer.send('deleteChalani', data);
+  deleteChalani() {
+    this._electron.ipcRenderer.send('deleteChalani', this.parsedData);
     this._electron.ipcRenderer.on('chalaniDeleted', (event, arg) => {
       console.log("deleted chalani");
       // console.log(arg);
@@ -179,6 +180,7 @@ export class ChalaniComponent implements OnInit {
       console.log("edited chalani");
       // console.log(arg);
     });
+    
     this.router.navigate(['chalani']);
   }
 

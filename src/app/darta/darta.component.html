@@ -9,8 +9,8 @@
                     <th width="9%">प्राप्त मिति</th>
                     <th width="13%">पठाउने अफिसको नाम</th>
                     <th width="15%">विषय</th>
-                    <th width="15%">फाटको नाम</th>
-                    <th width="9%">गएको मिति</th>
+                    <th width="15%">फाटंको नाम</th>
+                    <th width="9%">फाटंमा गएको मिति</th>
                     <th width="13%">कैफियत</th>
                     <th width="3%" class="no-arrow"></th>
                     <th width="3%" class="no-arrow"></th>
@@ -33,13 +33,32 @@
                         </button>
                     </th>
                     <th width="3%">
-                        <button (click)="deleteDarta(items)" class="btn btn-danger btn-sm">
+                        <button (click)="dataParse(items)" data-toggle="modal" data-target="#confirmDeleteDarta" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </th>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="confirmDeleteDarta" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">दर्ता खारेज</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal">
+                <h5 class="text-danger">एकचोटी हटाईएको इन्ट्री पुनः प्राप्त हुदैन!</h5>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-danger" value="Confirm Delete" (click)="deleteDarta()" data-dismiss="modal">
+                <input type="button" class="btn btn-primary" value="Close" data-dismiss="modal">
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal fade" id="editDarta" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
@@ -52,7 +71,7 @@
                 </button>
             </div>
             <div class="modal-body" id="modal">
-                <form [formGroup]="dartaForm" (ngSubmit)="editDarta(dartaForm.value)" id="editForm">
+                <form [formGroup]="dartaForm" id="editForm">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>दर्ता नं.</label>
@@ -63,12 +82,12 @@
                             <input type="text" class="form-control" id="dartaDateEdit" formControlName="dartaDate" placeholder="" required>
                         </div>
                         <div class="form-group col-md-3">
-                            <label>प्राप्त भएको पत्र संख्या</label>
+                            <label>पत्र संख्या</label>
                             <span *ngIf="dartaForm.controls.dartaPages.invalid && dartaForm.controls.dartaPages.touched" style="color: red">&nbsp; &nbsp;*</span>
                             <input type="number" class="form-control" formControlName="dartaPages" placeholder="" required>
                         </div>
                         <div class="form-group col-md-3">
-                            <label>प्राप्त भएको पत्रको मिति</label>
+                            <label>पत्रको मिति</label>
                             <input type="text" class="form-control" id="dartaPagesDateEdit" formControlName="dartaPagesDate" placeholder="">
                         </div>
                     </div>
@@ -114,11 +133,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Submit" [disabled]="dartaForm.controls.dartaAddress.invalid == true || dartaForm.controls.dartaDeptName.invalid == true || dartaForm.controls.dartaSubject.invalid == true || dartaForm.controls.dartaPages.invalid == true">
+                        <input type="submit" class="btn btn-primary" value="Submit" [disabled]="dartaForm.controls.dartaAddress.invalid == true || dartaForm.controls.dartaDeptName.invalid == true || dartaForm.controls.dartaSubject.invalid == true || dartaForm.controls.dartaPages.invalid == true" (click)="editDarta(dartaForm.value)" data-dismiss="modal">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-    
+   
